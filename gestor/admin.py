@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Choice, Attribute, AttributeValue, Event, Group, Organization, Member
+from .models import Choice, Attribute, AttributeValue, Event, Group, Organization, MainOrganization, Member
 
 class AttributeValueInline(admin.TabularInline):
     model = AttributeValue
@@ -26,10 +26,16 @@ class OrganizationAdmin(admin.ModelAdmin):
         AttributeValueInline,
     ]
 
+class MainOrganizationAdmin(admin.ModelAdmin):
+    inlines = [
+        AttributeValueInline,
+    ]
+
 admin.site.register(Choice)
 admin.site.register(Attribute)
 admin.site.register(AttributeValue)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Organization, OrganizationAdmin)
+admin.site.register(MainOrganization, MainOrganizationAdmin)
 admin.site.register(Member, MemberAdmin)

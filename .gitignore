@@ -99,6 +99,7 @@ venv.bak/
 .vscode
 VenvUjce/
 gestor/migrations/
+static/images/
 
 # Spyder project settings
 .spyderproject

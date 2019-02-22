@@ -51,7 +51,9 @@ class Organization(models.Model):
     )
 
 class MainOrganization(Organization):
-    pass
+    def save(self, *args, **kwargs):
+        self.id = 1
+        return super().save(*args, **kwargs)
 
 class Member(User):
     event = models.ManyToManyField(
@@ -103,3 +105,5 @@ class AttributeValue(models.Model):
         null = True,
         on_delete = models.CASCADE,
     )
+    def __str__(self):
+        return '%s (%s)' % (self.value, self.attribute)

@@ -1,5 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.views.generic import CreateView
+from .models import Member
 
-def home(request):
-    return HttpResponse("Hello, Django!")
+class UserCreateView(CreateView):
+    model = Member
+    template_name =  'gestor/login.html'
+    fields = ('username', 'password')
