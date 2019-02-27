@@ -17,6 +17,7 @@ class Attribute(models.Model):
     internal_name = models.CharField(max_length=30, null=False, blank=False)
     attribute_type = models.CharField(max_length=1, choices=ATTRIBUTE_TYPE)
     mandatory = models.BooleanField()
+    order = models.IntegerField()
     def __str__(self):
         return '%s (%s)' % (self.name, self.internal_name)
 
@@ -31,7 +32,7 @@ class Choice(models.Model):
 
 class Event(models.Model):
     pass
-    
+
 class Group(models.Model):
     event = models.ManyToManyField(
         Event,
