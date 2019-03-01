@@ -1,4 +1,5 @@
 from django.db import models
+from .icontype import icontype
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
@@ -50,6 +51,10 @@ class Organization(models.Model):
         Event,
         blank = True,
     )
+    def get_org_name(self):
+        return self.attributevalue_set.filter(
+            attribute__internal_name="org.name"
+        )
 
 class MainOrganization(Organization):
     def save(self, *args, **kwargs):
@@ -108,3 +113,14 @@ class AttributeValue(models.Model):
     )
     def __str__(self):
         return '%s (%s)' % (self.value, self.attribute)
+
+class MenuLine(models.Model):
+    name = models.CharField(max_length=1000)
+    link = models.CharField(max_length=1000)
+    icon = models.CharField(max_length=100, choices=icontype.ICON_TYPE)
+    parent = models.ForeignKey(
+        'self',
+        blank = True,
+        null = True,
+        on_delete = models.CASCADE,
+    )
